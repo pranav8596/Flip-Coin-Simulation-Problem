@@ -48,17 +48,29 @@ function storeInDictionary() {
 function calculatePercentage() {
 	for i in ${!flipCoinCombinations[@]}
 	do
-		flipCoinCombinations[$i]=$(($((${flipCoinCombinations[$i]}*100))/$numberOfFlips))
+		flipCoinCombinations[$i]=`echo "scale=2; $(($((${flipCoinCombinations[$i]}*100))/$numberOfFlips))" | bc`
 	done
-	echo -e "Percentage: ${flipCoinCombinations[@]}\n"
+	echo "Percentage: ${flipCoinCombinations[@]}"
+	echo -e "Winning combination: $(winningCombination)\n"	
+	#Unset the Dictionary
 	unset flipCoinCombinations
+}
+
+#To get the winning combination
+function winningCombination() {
+	for i in ${!flipCoinCombinations[@]}
+	do
+		echo $i ${flipCoinCombinations[$i]}
+	done | sort -k2 -rn | head -1
 }
 
 #Main
 read -p "Enter the number of times you want to flip a coin: " numberOfFlips
 echo "Singlet Combinations:"
 coinCombinations $SINGLET
+
 echo "Doublet Combinations:"
 coinCombinations $DOUBLET 
+
 echo "Triplet Combinations"
 coinCombinations $TRIPLET
