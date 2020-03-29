@@ -1,8 +1,9 @@
-#!/bin/bash
+#!/bin/bash -x
 
 #Constants
 SINGLET=1
 DOUBLET=2
+TRIPLET=3
 
 #Declaration of a Dictionary
 declare -A flipCoinCombinations
@@ -59,3 +60,5 @@ echo "Singlet Combinations:"
 coinCombinations $SINGLET
 echo "Doublet Combinations:"
 coinCombinations $DOUBLET 
+echo "Triplet Combinations"
+coinCombinations $TRIPLET
