@@ -22,7 +22,7 @@ function coinCombinations() {
 	#Declaration of a Dictionary
 	declare -A flipCoinCombinations
 	numberOfCoins=$1
-	for ((i=1; i<=$numberOfFlips; i++))
+	for ((i=1; i<=$NUMBER_OF_FLIPS; i++))
 	do
 		coinSide=""
 		for ((j=1; j<=$numberOfCoins; j++))
@@ -45,10 +45,10 @@ function storeInDictionary() {
 function calculatePercentage() {
 	for i in ${!flipCoinCombinations[@]}
 	do
-		flipCoinCombinations[$i]=`echo "scale=2; $(($((${flipCoinCombinations[$i]}*100))/$numberOfFlips))" | bc`
+		flipCoinCombinations[$i]=`echo "scale=2; $(($((${flipCoinCombinations[$i]}*100))/$NUMBER_OF_FLIPS))" | bc`
 	done
 	echo "Percentage: ${flipCoinCombinations[@]}"
-	echo -e "Winning combination: $(winningCombination)\n"	
+	echo -e "Winning combination: $(winningCombination)\n"
 	#Unset the Dictionary
 	unset flipCoinCombinations
 }
@@ -62,12 +62,12 @@ function winningCombination() {
 }
 
 #Main
-read -p "Enter the number of times you want to flip a coin: " numberOfFlips
+read -p "Enter the number of times you want to flip a coin: " NUMBER_OF_FLIPS
 echo "Singlet Combinations:"
 coinCombinations $SINGLET
 
 echo "Doublet Combinations:"
-coinCombinations $DOUBLET 
+coinCombinations $DOUBLET
 
 echo "Triplet Combinations"
 coinCombinations $TRIPLET
